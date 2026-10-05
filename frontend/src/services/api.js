@@ -1,6 +1,9 @@
 import axios from 'axios';
 
-const API_URL = '/api';
+// Local dev uses the Vite proxy ('/api'). In production set VITE_API_URL to the backend URL (no trailing slash).
+const API_URL = import.meta.env.VITE_API_URL
+  ? `${import.meta.env.VITE_API_URL.replace(/\/$/, '')}/api`
+  : '/api';
 
 const api = axios.create({
   baseURL: API_URL,
